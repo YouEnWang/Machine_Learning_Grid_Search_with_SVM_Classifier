@@ -225,9 +225,6 @@ def SVM(x_training, y_training, kernel, C, sigma):
     b = KT_condition(x_training, y_training, alpha_set, C, training_kernel_set)
     # print("bias = ", b)
 
-    # 將結果繪圖
-    # scatter_plot(training_data, test_data, alpha_set, b, C, sigma)
-
     return alpha_set, b
 
 
