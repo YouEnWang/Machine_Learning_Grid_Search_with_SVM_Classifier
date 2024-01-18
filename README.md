@@ -1,5 +1,5 @@
 # 目標
-利用鳶尾花資料(Iris data set)來訓練Support Vector Machine (SVM)，採用one-against one strategy來處理三類別分類問題，並以grid search來最佳化SVM之參數C與sigma，其過程再以two-fold cross validation使所得到的最佳參數組具有較佳的泛化性。
+利用鳶尾花資料(Iris data set)來訓練Support Vector Machine (SVM)，採用one-against-one strategy來處理三類別分類問題，並以grid search來最佳化SVM之參數C與sigma，其過程再以two-fold cross validation使所得到的最佳參數組具有較佳的泛化性。
 
 # 資料描述
 1. 安德森鳶尾花卉數據集(Anderson's Iris data set)為機器學習領域中，常被用來驗證演算法效能的資料庫。數據庫中包含三種不同鳶尾花標籤(Label)：山鳶尾(Setosa)、變色鳶尾(Versicolor)以及維吉尼亞鳶尾(Virginica)，且每種鳶尾花皆有50筆樣本。而每筆樣本以四種屬性作為特徵(單位：cm)：花萼長度(Sepal length)、花萼寬度(Sepal width)、花瓣長度(Petal length)以及花瓣寬度(Petal width)等四種屬性作為定量分析之數據。
