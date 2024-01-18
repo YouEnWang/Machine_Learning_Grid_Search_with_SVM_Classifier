@@ -294,57 +294,6 @@ def SVM_mult(initial_data, change, kernel, C, sigma):
 
     return predict_final, CR
 
-
-# 繪製結果
-def scatter_plot(training_data, test_data, alpha_set, b, C, sigma):
-    # 提取特徵和標籤
-    x_training, y_training = x_y(training_data)
-    x_test, y_test = x_y(test_data)
-
-    # 計算支持向量
-    support_vectors = []
-    for i, alpha in enumerate(alpha_set):
-        if alpha > 0:
-            support_vectors.append(x_training[i])
-
-    support_vectors = np.array(support_vectors)
-
-    # 繪製散點圖
-    plt.figure(figsize=(8, 8))
-    plt.rcParams['font.size'] = 14
-    plt.title(f'SVM Classifier (C={C}, sigma={sigma})')
-
-    plt.scatter(x_training[y_training == 1][:, 0], x_training[y_training == 1][:, 1], c='b', marker='o', label='Positive_training')
-    plt.scatter(x_training[y_training == -1][:, 0], x_training[y_training == -1][:, 1], c='b', marker='x', label='Negative_training')
-    plt.scatter(support_vectors[:, 0], support_vectors[:, 1], c='y', marker='*', s=100, label='Support Vectors')
-
-    # 創立網格來覆蓋測試數據的空間
-    x_min, x_max = np.amin(x_test.T[0]) - 1, np.amax(x_test.T[0]) + 1
-    y_min, y_max = np.amin(x_test.T[1]) - 1, np.amax(x_test.T[1]) + 1
-    xx, yy = np.meshgrid(np.arange(x_min, x_max, 0.01), np.arange(y_min, y_max, 0.01))
-    
-    # 對網格上的點進行預測
-    Z = []
-    grid_points = np.c_[xx.ravel(), yy.ravel()]
-    kernel_set = RBF_kernel(grid_points, x_training, sigma)
-    Z = [Decision(training_data, grid_points, alpha_set, b, C, kernel_set)]
-    Z = np.array(Z)
-    Z = Z.reshape(xx.shape)
-
-    # 畫決策邊界和測試樣本點
-    plt.contourf(xx, yy, Z, cmap=plt.cm.Paired, levels=[-1, 0, 1], alpha=0.8)
-    plt.scatter(x_test[y_test == 1][:, 0], x_test[y_test == 1][:, 1], c='r', marker='o', label='Positive_test')
-    plt.scatter(x_test[y_test == -1][:, 0], x_test[y_test == -1][:, 1], c='r', marker='x', label='Negative_test')
-    
-    plt.xlabel('Petal length')
-    plt.ylabel('Petal width')
-    plt.legend(scatterpoints=1, markerscale=1, loc='lower right')
-
-    plt.legend()
-    plt.grid(True)
-    plt.tight_layout()
-    plt.show()
-
 # main function
 def main():
     # load data
